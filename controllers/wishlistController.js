@@ -1,5 +1,5 @@
 const list = async (req, res) => {
-    res.json({});
+    res.json({});   
 }
 
 const get = (req, res) => {    
@@ -25,7 +25,6 @@ const addBook = (req, res) => {
 const removeBook = (req, res) => {    
     res.json({});
 }
-
 
 module.exports = {
     list,

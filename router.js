@@ -21,6 +21,7 @@ router.use(authController.isAuthenticatedMiddleware);
 
 router.get('/user/settings', userController.getSettings);
 router.put('/user/settings', userController.setSettings);
+
 router.get('/wishlist', wishlistController.list);
 router.post('/wishlist', wishlistController.create);
 router.get('/wishlist/:id', wishlistController.get);
@@ -30,5 +31,4 @@ router.delete('/wishlist/:id', wishlistController.remove);
 router.post('/wishlist/:id/book', wishlistController.addBook);
 router.delete('/wishlist/:id/book', wishlistController.removeBook);
 
-module.exports = router
-
+module.exports = router;
