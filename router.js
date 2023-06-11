@@ -4,6 +4,8 @@ const bookController = require('./controllers/bookController');
 const userController = require('./controllers/userController'); 
 const wishlistController = require('./controllers/wishlistController');
 
+const errorHandler = require('./controllers/errorHandler');
+
 /**
  * Public Routes
  */
@@ -30,5 +32,7 @@ router.put('/wishlist/:id', wishlistController.update);
 router.delete('/wishlist/:id', wishlistController.remove);
 router.post('/wishlist/:id/book', wishlistController.addBook);
 router.delete('/wishlist/:id/book', wishlistController.removeBook);
+
+router.use(errorHandler.handler);
 
 module.exports = router;
