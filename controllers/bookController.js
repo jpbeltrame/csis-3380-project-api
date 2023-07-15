@@ -1,16 +1,30 @@
 const bookService = require("./../services/bookService");
 
-const search = async (req, res) => {
+const search = async (req, res, next) => {
   try {
-    let response = await bookService.search()
+    let {query, limit = 10, offset = 0} = req.body;
+
+    if (query == '') {
+      throw new Error('Invalid param query')
+    }
+
+    let response = await bookService.search(query, limit, offset);
+
     res.json(response.data);
   } catch (err) {
-    console.log(err);
+    next(err);
   }
 }
 
-const get = (req, res) => {
-  res.json({});
+const get = async (req, res, next) => {
+  try {
+    const bookId = req.params.id
+    const response = await bookService.getById(bookId);
+
+    res.json(response.data);
+  } catch (error) {
+    next(error);
+  }
 }
 
 module.exports = {

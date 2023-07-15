@@ -3,8 +3,8 @@ const jsonwebtoken = require('jsonwebtoken');
 const userModel = require('../models/user');
 
 const signin = async (req, res, next) => {
-  
-  const { username, password } = {... req.body};
+ 
+  const { username, password } = req.body;
   if (username.length == 0 || password.length == 0) { 
     return next(new Error('Invalid fields'));
   }

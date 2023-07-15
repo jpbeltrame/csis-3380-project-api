@@ -3,7 +3,7 @@ const handler = (err, req, res, next) => {
     return next(err);
   }
   res.status(500);
-  res.json({ error: err });
+  res.json({ error: err.message });
 };
 
 module.exports = { handler };

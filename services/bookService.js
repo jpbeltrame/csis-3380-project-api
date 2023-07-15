@@ -10,16 +10,30 @@ const $axios = axios.create({
     }
 });
 
-const search = (searchQuery) => {
+const search = (searchQuery, limit = 10, startIndex = 0, orderBy = 'newest') => {
+    const maxResults = limit > 40 ? 40 : limit;
+
     return $axios.get(
         'volumes', {
-            params: {q: searchQuery}
+            params: {
+              q: searchQuery,
+              filter: 'full',
+              startIndex,
+              maxResults,
+              orderBy
+            },
         });
 }
 
-const get = (bookId) => {}
+const getById = (bookId) => {
+  try {
+    return $axios.get(`volumes/${bookId}`);
+  } catch (error) {
+    return error.message;
+  }
+}
 
 module.exports = {
     search,
-    get
+    getById
 } 
