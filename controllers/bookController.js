@@ -27,7 +27,30 @@ const get = async (req, res, next) => {
   }
 }
 
+const getBookDetails = (req, res) => {
+  res.json({});
+}
+
+const addReview = (req, res) => {
+  res.json({});
+}
+const getReview = (req, res) => {
+  res.json({});
+}
+
+const addProgress = (req, res) => {
+  res.json({});
+}
+const getProgress = (req, res) => {
+  res.json({});
+}
+
 module.exports = {
   search,
-  get
+  get, 
+  getBookDetails,
+  addReview,
+  getReview,
+  addProgress,
+  getProgress
 }
