@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jsonwebtoken = require('jsonwebtoken');
 const userModel = require('../models/user');
+const APIError = require('../services/APIError');
 
 const signin = async (req, res, next) => {
  
@@ -24,7 +25,7 @@ const signin = async (req, res, next) => {
 
   user.login.password = '';
   const jwtToken = jsonwebtoken.sign(
-    {name: user.name}, 
+    {name: user.name, id: user._id}, 
     process.env.TOKEN_SECRET, 
     { expiresIn: '1800s' }
   );
@@ -66,22 +67,26 @@ const signup = async (req, res, next) => {
 const isAuthenticatedMiddleware = async (req, res, next) => {
   const authHeader = req.headers['authorization'];
   const token = authHeader && authHeader.split(' ')[1]
-
-  if (token == null) 
-    return res.sendStatus(401)
-
+  
   try {
-    user = await jsonwebtoken.verify(
+    if (!token) {
+      throw new APIError(null ,401);
+    }
+
+    const user = await jsonwebtoken.verify(
       token, 
       process.env.TOKEN_SECRET
     );
-  } catch (err) {
-    return res.sendStatus(403);
+
+    req.user = user;
+    return next();
+  } catch (error) {
+    if (error instanceof APIError) {
+      next(error)
+    } else {;
+      next(new APIError(error.message, 403));
+    }
   }
-
-  req.user = user;
-
-  return next();
 }
 
 module.exports = {

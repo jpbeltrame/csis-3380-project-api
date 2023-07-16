@@ -1,15 +1,25 @@
 const userModel = require('../models/user')
-const wishlistModel = require('../models/wishlist')
+const wishlistModel = require('../models/wishlist');
+const APIError = require('../services/APIError');
 
 const getProfile = async (req, res, next) => {
   try {
     const public =  !(req.user && req.user.id && req.user.id == req.params.id);
 
-    const user = await userModel.findById(req.params.id).exec();
-    const wishlist = await wishlistModel.find({ public, user_id: req.params.id }).exec();
-    const temp = {... user._doc, wishlist};
+    const user = await userModel
+      .findById(req.params.id)
+      .select('name')
+      .exec();
 
-    res.json(temp);
+    if (!user) { 
+      throw new APIError('not found', 404);
+    }
+
+    const wishlist = await wishlistModel
+      .find({ public, user_id: req.params.id })
+      .exec();
+
+    res.json({... user._doc, wishlist});
   } catch (err) {
     next(err)
   }

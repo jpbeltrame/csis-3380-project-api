@@ -26,7 +26,6 @@ router.use(authController.isAuthenticatedMiddleware);
 router.get('/user/settings', userController.getSettings);
 router.put('/user/settings', userController.setSettings);
 
-
 router.get('/books/:id/progress', bookController.getProgress);
 router.post('/books/:id/progress', bookController.addProgress);
 router.post('/books/:id/reviews', bookController.addReview);
