@@ -39,9 +39,6 @@ const create = async (req, res, next) => {
     const userId = req.user.id;
     const { name, public } = req.body;
 
-
-    console.log(userId);
-
     const wishlist = await wishlistModel
       .create({ name, public, user_id: userId });
 
@@ -52,11 +49,12 @@ const create = async (req, res, next) => {
   }
 }
 
-const remove = (req, res, next) => {
+const update = (req, res, next) => {
+  
   res.json({});
 }
 
-const update = (req, res, next) => {
+const remove = (req, res, next) => {
   res.json({});
 }
 
