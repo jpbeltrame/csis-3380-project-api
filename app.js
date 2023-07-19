@@ -24,7 +24,6 @@ async function init() {
     });
 
   } catch (err) {
-    console.log(process.env.MONGO_DB_URL)
     console.log(err);
   }
 }
