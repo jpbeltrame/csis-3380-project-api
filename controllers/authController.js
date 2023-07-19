@@ -15,13 +15,16 @@ const signin = async (req, res, next) => {
     .select('+login.password')
     .exec();
 
+  if (!user) 
+    return next(new APIError("", 401));
+
   const isPasswordValid = await bcrypt.compare(
     password, 
     user.login.password
   );
   
   if (!isPasswordValid) 
-    return next(new Error('Invalid fields'));
+    return next(new APIError('Invalid fields', 401));
 
   user.login.password = '';
   const jwtToken = jsonwebtoken.sign(
@@ -83,7 +86,7 @@ const isAuthenticatedMiddleware = async (req, res, next) => {
   } catch (error) {
     if (error instanceof APIError) {
       next(error)
-    } else {;
+    } else {
       next(new APIError(error.message, 403));
     }
   }

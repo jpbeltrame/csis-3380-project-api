@@ -49,9 +49,24 @@ const create = async (req, res, next) => {
   }
 }
 
-const update = (req, res, next) => {
-  
-  res.json({});
+const update = async (req, res, next) => {
+  try {
+    const wishlistId = req.params.id;
+    const userId = req.user.id;
+    const { name, public } = req.body;
+
+    await wishlistModel
+      .updateOne({ user_id: userId, _id: wishlistId }, { name, public });
+
+    const wishlist = await wishlistModel
+      .findById(wishlistId)
+      .exec();
+
+    res.json(wishlist);
+
+  } catch (error) {
+    next(error);
+  }
 }
 
 const remove = (req, res, next) => {

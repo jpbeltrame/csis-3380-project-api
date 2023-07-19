@@ -1,0 +1,352 @@
+{
+	"info": {
+		"_postman_id": "228c7588-7288-4cd6-81b9-1b9eb6e1e55b",
+		"name": "Books API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "4628787"
+	},
+	"item": [
+		{
+			"name": "auth/signin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"jpbeltrame\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/auth/signin",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auth",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Joao\",\r\n    \"username\": \"jpbelstrame\",\r\n    \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/auth/signup",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "books",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"query\": \"temp\",\r\n    \"limit\": 20,\r\n    \"offset\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/books",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "books/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/books/DIEzEAAAQBAJ",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"books",
+						"DIEzEAAAQBAJ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "users/profile/:id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/users/profile/64855fb1923ade538b8238d2",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"users",
+						"profile",
+						"64855fb1923ade538b8238d2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/settings",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/user/settings",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "user/settings",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/user/settings",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"user",
+						"settings"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wishlist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/wishlist",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wishlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wishlist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"temp2\",\r\n    \"public\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/wishlist",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wishlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wishlist/:id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "authorization",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "{{host}}/wishlist/64b371b2b5b8ec042b650404",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wishlist",
+						"64b371b2b5b8ec042b650404"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wishlist/:id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/wishlist/:id",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wishlist",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wishlist/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/wishlist/:id",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wishlist",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wishlist/:id/book",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/wishlist/:id/book",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wishlist",
+						":id",
+						"book"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "wishlist/:id/book",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/wishlist/:id/book",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"wishlist",
+						":id",
+						"book"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

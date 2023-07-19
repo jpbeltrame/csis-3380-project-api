@@ -1,3 +1,4 @@
+const APIError = require("../services/APIError");
 const bookService = require("./../services/bookService");
 
 const search = async (req, res, next) => {
@@ -5,7 +6,7 @@ const search = async (req, res, next) => {
     let {query, limit = 10, offset = 0} = req.body;
 
     if (query == '') {
-      throw new Error('Invalid param query')
+      throw new APIError('Invalid param query', 404)
     }
 
     let response = await bookService.search(query, limit, offset);
