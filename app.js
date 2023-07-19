@@ -8,7 +8,7 @@ const router = require('./router')
 
 async function init() {
   try {
-    await mongoose.connect(process.env.MONGO_DB_URL, {
+    await mongoose.connect(process.env.MONGO_DB_URL + process.env.MONGO_DB_NAME, {
       useUnifiedTopology: true,
       useNewUrlParser: true,
       autoIndex: true
