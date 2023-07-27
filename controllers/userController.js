@@ -2,7 +2,7 @@ const userModel = require('../models/user')
 const wishlistModel = require('../models/wishlist');
 const APIError = require('../services/APIError');
 
-const getProfile = async (req, res, next) => {
+const getProfileForWishList = async (req, res, next) => {
   try {
     const public =  !(req.user && req.user.id && req.user.id == req.params.id);
 
@@ -25,16 +25,48 @@ const getProfile = async (req, res, next) => {
   }
 }
 
-const getSettings = (req, res) => {
-  res.json({});
-}
+const getSettings = async (req, res, next) => {
+  try {
+    // Find the user by ID
+    const user = await userModel.findById(req.params.id).exec();
 
-const setSettings = (req, res) => {
-  res.json({});
-}
+    if (!user) {
+      throw new APIError('User not found', 404);
+    }
+
+    // Send the entire user information in the response
+    res.json(user);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const setSettings = async (req, res, next) => {
+  try {
+    // Find the user by ID
+    const user = await userModel.findById(req.params.id).exec();
+
+    if (!user) {
+      throw new APIError('User not found', 404);
+    }
+
+    // Update the user information with the new data from the request body
+    const { name, login } = req.body;
+    user.name = name;
+    user.login = login;
+
+    // Save the updated user object back to the database
+    const updatedUser = await user.save();
+
+    // Respond with the updated user's information in the response
+    res.json(updatedUser);
+  } catch (err) {
+    next(err);
+  }
+};
 
 module.exports = {
-  getProfile,
+  getProfileForWishList,
   getSettings,
   setSettings,
 }

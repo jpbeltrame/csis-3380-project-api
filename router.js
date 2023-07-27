@@ -16,7 +16,10 @@ router.get('/books', bookController.search);
 router.get('/books/:id', bookController.get);
 router.get('/books/:id/reviews', bookController.getReview);
 
-router.get('/users/profile/:id', userController.getProfile);
+router.get('/users/profile/:id', userController.getSettings);
+router.post('/users/profile/:id', userController.setSettings);
+router.get('/users/profile/wishlist/:id', userController.getProfileForWishList);
+
 
 /**
  * Restricted Routes

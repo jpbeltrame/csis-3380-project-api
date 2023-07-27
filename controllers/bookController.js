@@ -4,7 +4,7 @@ const bookService = require("./../services/bookService");
 const search = async (req, res, next) => {
   try {
     let {query, limit = 10, offset = 0} = req.body;
-
+    // console.log("checkpoint");
     if (query == '') {
       throw new APIError('Invalid param query', 404)
     }
