@@ -13,6 +13,7 @@ router.post('/auth/signin', authController.signin);
 router.post('/auth/signup', authController.signup);
 
 router.get('/books', bookController.search);
+router.get('/booksWithQuery', bookController.searchWithQuery);
 router.get('/books/:id', bookController.get);
 router.get('/books/:id/reviews', bookController.getReview);
 

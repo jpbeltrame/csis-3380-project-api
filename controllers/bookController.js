@@ -6,6 +6,24 @@ const search = async (req, res, next) => {
     let {query, limit = 10, offset = 0} = req.body;
     // console.log("checkpoint");
     if (query == '') {
+      // console.log('query is empty in request');
+      throw new APIError('Invalid param query', 404)
+    }
+
+    let response = await bookService.search(query, limit, offset);
+
+    res.json(response.data);
+  } catch (err) {
+    next(err);
+  }
+}
+const searchWithQuery = async (req, res, next) => {
+  try {
+    let {query, limit = 10, offset = 0} = req.query;
+    // console.log("checkpoint");
+    console.log(query);
+    if (query == '') {
+      console.log('query is empty in request');
       throw new APIError('Invalid param query', 404)
     }
 
@@ -44,6 +62,7 @@ const getProgress = (req, res) => {
 
 module.exports = {
   search,
+  searchWithQuery,
   get, 
   addReview,
   getReview,
