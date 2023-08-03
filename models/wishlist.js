@@ -13,7 +13,11 @@ const wishlistSchema = new mongoose.Schema({
     type: Boolean,
     require: true
   },
-  books: mongoose.Schema.Types.Mixed
+  // books: mongoose.Schema.Types.Mixed
+  book: {
+    type: String,
+    required: true,
+  },
 });
 
 const wishlistModel = mongoose.model('wishlist', wishlistSchema);

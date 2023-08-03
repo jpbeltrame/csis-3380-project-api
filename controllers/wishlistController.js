@@ -34,14 +34,43 @@ const get = async (req, res, next) => {
   }
 }
 
+//ADDED ENDPOINT
+// Route to check if a book exists in all wishlists for a user
+const checkItemInWishlist = async (req, res, next) => {
+  try {
+    const { userId, bookId } = req.params;
+    console.log(req.params);
+    // Find all wishlists for the user
+    const wishlists = await wishlistModel.find({ user_id: userId });
+
+    if (wishlists.length === 0) {
+      // User's wishlist not found
+      return res.json({ isInWishlist: false });
+    }
+
+    // Check if the book ID exists in any of the user's wishlists using Array.some()
+    const isInWishlist = wishlists.some((wishlist) => wishlist.book === bookId);
+
+    res.json({ isInWishlist });
+  } catch (error) {
+    next(error);
+  }
+}
+
 const create = async (req, res, next) => {
   try {
-    const userId = req.user.id;
-    const { name, public } = req.body;
+    console.log(req.body);
+    const { user_id, name, public, book } = req.body;
 
-    const wishlist = await wishlistModel
-      .create({ name, public, user_id: userId });
+    console.log("Type of user_id:", typeof req.body.user_id);
+    console.log("Type of bookId:", typeof req.body.book);
 
+    const wishlist = await wishlistModel.create({
+      name,
+      public,
+      user_id,
+      book, // Store the book ID in the wishlist's books array
+    });
     res.json(wishlist);
 
   } catch (error) {
@@ -89,4 +118,5 @@ module.exports = {
   create,
   addBook,
   removeBook,
+  checkItemInWishlist
 }
