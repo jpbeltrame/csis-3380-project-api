@@ -32,6 +32,9 @@ router.get('/wishlist/:userId/:bookId', wishlistController.checkItemInWishlist);
 router.put('/wishlist/:id', wishlistController.update);
 router.delete('/wishlist/:id', wishlistController.remove);
 
+//NEW ENDPOINT FOR DELETE WISHLIST ELEMENT
+router.delete('/wishlist/:userId/:bookId', wishlistController.removeBookOfWishlist);
+
 router.post('/wishlist/:id/book', wishlistController.addBook);
 router.delete('/wishlist/:id/book', wishlistController.removeBook);
 

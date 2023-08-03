@@ -57,6 +57,29 @@ const checkItemInWishlist = async (req, res, next) => {
   }
 }
 
+//ADDED ENDPOINT
+// Route to remove books from the wishlist of the user
+const removeBookOfWishlist = async (req, res, next) => {
+  const { userId, bookId } = req.params;
+
+  try {
+    // Find the wishlist entry with the given user ID and book ID and delete it
+    const deletedEntry = await wishlistModel.findOneAndDelete({
+      user_id: userId,
+      book: bookId,
+    });
+
+    if (!deletedEntry) {
+      return res.status(404).json({ message: 'Book not found in wishlist.' });
+    }
+
+    return res.status(200).json({ message: 'Book removed from wishlist successfully.' });
+  } catch (error) {
+    console.error('Error removing book from wishlist:', error);
+    return res.status(500).json({ message: 'Internal server error.' });
+  }
+};
+
 const create = async (req, res, next) => {
   try {
     console.log(req.body);
@@ -118,5 +141,6 @@ module.exports = {
   create,
   addBook,
   removeBook,
-  checkItemInWishlist
+  checkItemInWishlist,
+  removeBookOfWishlist
 }
