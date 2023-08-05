@@ -60,7 +60,7 @@ const signup = async (req, res, next) => {
 
     await user.save();
 
-    res.json(user);
+    return res.json(user);
 
   } catch (err) {
     next(err);

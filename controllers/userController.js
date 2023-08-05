@@ -5,11 +5,8 @@ const APIError = require('../services/APIError');
 // Route to get distinct bookIds for a user's wishlist
 const getProfileForWishList = async (req, res, next) => {
   try {
-    console.log("getting the wishlists");
     const { userId } = req.params;
-    console.log("userid:", userId);
     const distinctBooks = await wishlistModel.distinct('book', { user_id: userId });
-    console.log(distinctBooks);
     res.json({ distinctBooks });
   } catch (err) {
     next(err);
@@ -18,14 +15,12 @@ const getProfileForWishList = async (req, res, next) => {
 
 const getSettings = async (req, res, next) => {
   try {
-    // Find the user by ID
     const user = await userModel.findById(req.params.id).exec();
 
     if (!user) {
       throw new APIError('User not found', 404);
     }
 
-    // Send the entire user information in the response
     res.json(user);
   } catch (err) {
     next(err);
