@@ -3,12 +3,12 @@ const authController = require('./controllers/authController');
 const bookController = require('./controllers/bookController'); 
 const userController = require('./controllers/userController'); 
 const wishlistController = require('./controllers/wishlistController');
-
 const errorHandler = require('./controllers/errorHandler');
 
 /**
  * Public Routes
  */
+router.get('/', (req, res) => { return res.json({}); });
 router.post('/auth/signin', authController.signin);
 router.post('/auth/signup', authController.signup);
 
@@ -26,15 +26,14 @@ router.get('/users/profile/wishlist/:userId', userController.getProfileForWishLi
 router.get('/wishlist', wishlistController.list);
 router.post('/wishlist', wishlistController.create);
 router.get('/wishlist/:id', wishlistController.get);
+
 //NEW ENDPOINT FOR CHECK WISHLIST
 router.get('/wishlist/:userId/:bookId', wishlistController.checkItemInWishlist);
-//
 router.put('/wishlist/:id', wishlistController.update);
 router.delete('/wishlist/:id', wishlistController.remove);
 
 //NEW ENDPOINT FOR DELETE WISHLIST ELEMENT
 router.delete('/wishlist/:userId/:bookId', wishlistController.removeBookOfWishlist);
-
 router.post('/wishlist/:id/book', wishlistController.addBook);
 router.delete('/wishlist/:id/book', wishlistController.removeBook);
 

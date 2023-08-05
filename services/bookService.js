@@ -10,14 +10,14 @@ const $axios = axios.create({
     }
 });
 
-const search = (searchQuery, limit = 10, startIndex = 0, orderBy = 'newest') => {
+const search = (searchQuery, limit = 10, startIndex = 0, orderBy = 'relevance') => {
     const maxResults = limit > 40 ? 40 : limit;
 
     return $axios.get(
         'volumes', {
             params: {
               q: searchQuery,
-              filter: 'full',
+              printType: 'books',
               startIndex,
               maxResults,
               orderBy
