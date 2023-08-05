@@ -40,7 +40,6 @@ const signin = async (req, res, next) => {
 
 const signup = async (req, res, next) => {
   try {
-    console.log(req.body);
     const user = new userModel({
       name: req.body.name,
       login: {
